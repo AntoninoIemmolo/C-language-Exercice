@@ -1,8 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     Pova
-relocations:
-  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003CAC, symSize: 0xB0 }
-  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003CAC, symSize: 0xB0 }
-  - { offsetInCU: 0xA1, offset: 0xA1, size: 0x8, addend: 0x0, symName: _gcd, symObjAddr: 0xB0, symBinAddr: 0x100003D5C, symSize: 0x204 }
-...
