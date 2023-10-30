@@ -1,0 +1,8 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     Prova
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _cercaRegexp, symObjAddr: 0x0, symBinAddr: 0x1000037D0, symSize: 0x6FC }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _cercaRegexp, symObjAddr: 0x0, symBinAddr: 0x1000037D0, symSize: 0x6FC }
+  - { offsetInCU: 0x198, offset: 0x198, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x6FC, symBinAddr: 0x100003ECC, symSize: 0x98 }
+...
