@@ -9,13 +9,14 @@ int majority( int *Vet, int N){
 			Max=Vet[i];
 		}
 	}
-	//Dynamimc allocation of Point array, free at line:
+	//Dynamimc allocation of Point array, free at line: 19
 	Point=(int *)malloc(Max*sizeof(int));
 	for (int i=0;i<Max;i++)
 		Point[i]=0;
 	if(Point==NULL) 
 		printf("malloc failed");
 	res = majority_ric(Vet,N,Point,Vet[0],N/2);
+	free(Point;)
 	return res;
 
 }
