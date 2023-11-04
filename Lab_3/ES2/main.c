@@ -25,14 +25,13 @@ int main(int argn,char* argv[]){
 	}
 	Crea_Playlist(vet_amici,num_amici,0,NULL);
 	fclose(Fin);
-	return 8;
+	return 0;
 }
 
 void Crea_Playlist(Amici* VetAmici,int NumAmici,int ProfRic,int* tmp){
 	if(ProfRic==0){
-		//Dynamic allocation free ASAP	
+		//Dynamic allocation free at line 52
 		tmp = (int*)malloc(NumAmici*sizeof(int));
-		printf("jljhfkdsagflkjasgflgsjkfs\n");
 	}
 	if(tmp==NULL) printf("Malloc failed");
 	//for cicle calls every ricursive iteretion 
@@ -47,12 +46,10 @@ void Crea_Playlist(Amici* VetAmici,int NumAmici,int ProfRic,int* tmp){
 			printf("=================================================\n");
 			for(int j=0;j<NumAmici;j++)
 				printf("%s\n",(VetAmici[j]).VetCan[tmp[j]]);
-		//	printf("=================================================\n");
 		}
 	}
-	if(ProfRic==0){
+	if(ProfRic==0)
 		free(tmp);
-	}
 	return;
 }
 
