@@ -20,15 +20,12 @@ int gcd(int a, int b){
 			r = 2*gcd(a/2,b/2);
 		else
 			r = gcd(a,b/2);
-
-
 	}
 	else if(a%2==0 && b%2!=0){ 
 		if(a/2>b)
 			r=gcd(a/2,b);
 		else
 			r=gcd(b,a/2);
-
 	}			
 	else
 		if((a-b)/2>b)
