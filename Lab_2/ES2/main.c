@@ -27,6 +27,7 @@ void crea_mat(int ***PuntaMat,int NRighe,int NColonne){
 }
 void separa(int **PuntaMat, int nr, int nc,int **VetBianchi,int **VetNeri){
 	int cont1=0,cont2=0;
+//Si suppone che la scachiera abbia come casella "in alto a sinistra" una casella bianca	
 	*VetBianchi=malloc((((nc*nr))/2)*sizeof(int));
 	*VetNeri=malloc(((nc*nr)-1/2)*sizeof(int));
 	for(int i=0;i<nr;i++){
