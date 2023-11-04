@@ -21,24 +21,22 @@ T_TRATTA*** ricerca_tratta(T_TRATTA** PuntIn,T_TRATTA** PuntFin,char target[],T_
 
 
 int main(int argc, const char * argv[]) {
-    T_TRATTA Vet_Tratte[MaxDati]={0}, t,*Vet_ord[MaxDati],**VetPunt[2]={NULL,NULL},**PuntaMultiOrd[5]; 
+    T_TRATTA Vet_Tratte[MaxDati]={0}, t,**VetPunt[2]={NULL,NULL},**VetOrd; 
     int N_Tratte=0, Codice_Operazione = 0,Codice_Operazione2=-1,c=0,ContMulti=0,FlagMulti;
     FILE* Fin,*Fout;
-    
     char operazione[20],tmp[10],stringTarg[15];
-
 	Fout = fopen("stampa.txt","w");
     Fin = fopen("log.txt", "r");
     fscanf(Fin, "%d",&N_Tratte);
-
 	for(int i=0;i<N_Tratte;i++){
 		fscanf(Fin, "%s %s %s %s %s %s %d",t.Cod_trat,t.Part, t.Dest,t.Data,t.Ora_Part, t.Ora_Arri,&t.Rit);
 		Vet_Tratte[i] = t;
 	}	
 	for (int i=0;i<5;i++){
-		PuntaMultiOrd[i]=(T_TRATTA**)malloc(MaxDati*sizeof(T_TRATTA*));	
+		//Dynamic allocation of any element od VetOrd free at line 119
+		VetOrd=(T_TRATTA**)malloc(MaxDati*sizeof(T_TRATTA*));	
 		for (int j=0;j<MaxDati;j++){
-			(PuntaMultiOrd[i])[j]=&Vet_Tratte[j];
+			(VetOrd)[j]=&Vet_Tratte[j];
 	}
 }
 
@@ -46,7 +44,6 @@ int main(int argc, const char * argv[]) {
     scanf("%s",operazione);
     if(strcmp(operazione,"stampa")==0){
     while (Codice_Operazione != 6) {
-
         printf("===========================================================================================================\n");
         printf("inserire l'operazione che si vuole svolgere tra:\ndata\npartenza\ncapolinea\nritardo\nritardo_tot\nfine\n==>");
         scanf("%s", operazione);
@@ -56,7 +53,6 @@ printf("========================================================================
     }
     }
     else if(strcmp(operazione,"ordina")==0){
-	
     while (Codice_Operazione2 != 0) {
 	    c=0;
 	    
@@ -64,17 +60,7 @@ printf("========================================================================
         printf("inserire l'oridinamento che si vuole svolgere tra: \ndata\ntratta\npartenza\narrivo\nstampa\nricerca\nmultiord\nfine\n==>");
         scanf("%s", operazione);
 printf("===========================================================================================================\n");
-        Codice_Operazione2 = Cod_Operazione_Ordinamento(operazione);
-	if(Codice_Operazione2==7){
-		printf("Opzione Multi ordinamento attiva\n");
-		printf("Da ora in poi tutti gli ordinamenti richiesti saranno salvati \n");
-printf("===========================================================================================================\n");
-        printf("inserire l'oridinamento che si vuole svolgere tra: \ndata\ntratta\npartenza\narrivo\nstampa\nricerca\nmultiord\nfine\n==>");
-        scanf("%s", operazione);
-printf("===========================================================================================================\n");
-		FlagMulti=1;
-        Codice_Operazione2 = Cod_Operazione_Ordinamento(operazione);
-	}
+        Codice_Operazione2 = Cod_Operazione_Ordinamento(operazione);	
 	if(Codice_Operazione2==5){
 		printf("si vuole stampare a video o su file?\n");
 		scanf("%s",tmp);
@@ -89,33 +75,25 @@ printf("========================================================================
 	
 	}
 	else if(Codice_Operazione2==6){
-		Ordina(PuntaMultiOrd[ContMulti],2);
+		Ordina(VetOrd,2);
 		VetPunt[0]=NULL;VetPunt[1]=NULL;
 		for(int i=0;i<15;i++){
 			stringTarg[i]='\0';
 		}
 		printf("inserire la stringa di recerca:\n==>");
 		scanf("%s",stringTarg);
-		ricerca_tratta(PuntaMultiOrd[ContMulti],&(PuntaMultiOrd[ContMulti])[MaxDati-1],stringTarg,VetPunt,0);
+		ricerca_tratta(VetOrd,&(VetOrd)[MaxDati-1],stringTarg,VetPunt,0);
 		while(VetPunt[0]+c<=VetPunt[1]&&*(VetPunt)!=NULL){
 			printf("(Cod_trat = %s, Part = %s, Dest = %s, Data = %s, Ora Part = %s, Ora Arrivo = %s, Rit = %d)\n",(*(VetPunt[0]+c))->Cod_trat,(*(VetPunt[0]+c))->Part,(*(VetPunt[0]+c))->Dest,(*(VetPunt[0]+c))->Data,(*(VetPunt[0]+c))->Ora_Part,(*(VetPunt[0]+c))->Ora_Arri,(*(VetPunt[0]+c))->Rit);
 			c++;
 		}
 	}
-	else Ordina (PuntaMultiOrd[ContMulti],Codice_Operazione2);
-	if(FlagMulti==1){
-		if(ContMulti>=4){
-			printf("Numero massimo di ordinameti in paralleto (5) è stato ragiunto\n");
-			printf("L'ultimo ordimento è stato sovrascritto dal corrente\n");
-		}
-		else ContMulti++;
-	}
+	else if(Codice_Operazione2!=0) Ordina (VetOrd,Codice_Operazione2);
 	if(Codice_Operazione2!=0) printf("Operazione avvenuta con sucesso\n");
     }
 }
 	fclose(Fout); fclose(Fin);
-	for(int i=0;i<5;i++)
-		free(PuntaMultiOrd[i]);
+	free(VetOrd);
     return 0;
 }
 
@@ -136,7 +114,6 @@ int  Cod_Operazione_Ordinamento(char Oper[]){
     else if(strcmp(Oper, "arrivo")==0) return 4;
     else if(strcmp(Oper, "stampa")==0) return 5;
     else if(strcmp(Oper, "ricerca")==0) return 6;
-    else if(strcmp(Oper, "multiord")==0) return 7;
     else if(strcmp(Oper, "fine")==0) return 0;
     else{ printf("errore operazione non riconosciuta\n"); return -1;}
 }
