@@ -18,25 +18,29 @@ void Node_Free(type_node *p_nodo);
 
 
 int main(int argv, char* argc[]){	
-	int i=0;
+	int i=0,*scelte;
 	FILE* Fin;
 	type_node **VetNodi;
 	Fin=fopen("../input files/E1/grafo.txt","r");
 	if(Fin==NULL) return -1;
 	VetNodi=File_Reader(Fin);
-	Cerca_Combin(VetNodi,NULL,0,&i);
+	scelte=(int*)malloc(n*sizeof(int));
+	//dynamic allocation of array scelte, free at line: 30
+	Cerca_Combin(VetNodi,scelte,0,&i);
+	free(scelte);
 	for(int i=0;i<n;i++) {
 		Node_Free(VetNodi[i]);
 	}
-///	free(VetNodi);
+	free(VetNodi);
 	return 0;
 }
-//la struttora che contine i nodi appartien al programma chiamante
+//la struttura che contine i nodi appartien al programma chiamante
+//i nodi sono posseduti dalla "classe" di funzioni Node
 type_node** File_Reader(FILE* fin){
 	int l1,l2;
 	type_node **vet_nodi;
 	fscanf(fin,"%d %d ",&n,&e);
-	//dynamic allocation of array vet_nodi, free at line:
+	//dynamic allocation of array vet_nodi, free at line: 31
 	vet_nodi=(type_node**)malloc(n*sizeof(type_node*));
 	for(int i=0;i<n;i++) {
 		vet_nodi[i]=NULL;
@@ -83,16 +87,16 @@ type_node** File_Reader(FILE* fin){
 //la liberazione dell'heap spetta a loro
 type_node* node_allocation(){
 	type_node* stu_nodo;
-	//dynamic allocation of stu_nodo, free at line:
+	//dynamic allocation of stu_nodo, free have to be done by Node_Free function wich is
+	//called by main and is defined at line: 139
 	stu_nodo=(type_node*)malloc(sizeof(type_node));
-	//dynamic allocation of archi in stu_nodo, free at line:
+	///dynamic allocation of archi in stu_nodo, free have to be done by Node_Free function wich is
+	//called by main and is defined at line: 139
 	stu_nodo->archi=calloc(n,sizeof(int));
 	return stu_nodo;
 }
 
 void Cerca_Combin(type_node** vet_nodi,int* scelte,int prof,int *i){
-	//dynamic allocation of array scelte, free at line:
-	if(scelte==NULL) scelte=(int*)malloc(n*sizeof(int));
 	if(prof>=n){
 		if(Verifica_Combinazione(vet_nodi,scelte)){
 			Wrap_Stampa_Combinazione(scelte,0,*i);
@@ -116,7 +120,8 @@ void Wrap_Stampa_Combinazione(int* scelte,int iniz,int cnt){
 }
 void Stampa_Combinazione(int* scelte,int iniz){
 	if(iniz>=n) return;
-	printf("%d ",*(scelte+iniz));
+	if(*(scelte+iniz)))
+		printf("%d ",iniz);
 	Stampa_Combinazione(scelte, iniz+1);
 	return;
 }
