@@ -1,0 +1,15 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     Prova
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100001EA0, symSize: 0x7DC }
+  - { offsetInCU: 0xE7, offset: 0xE7, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100001EA0, symSize: 0x7DC }
+  - { offsetInCU: 0x291, offset: 0x291, size: 0x8, addend: 0x0, symName: _Cod_Operazione, symObjAddr: 0x7DC, symBinAddr: 0x10000267C, symSize: 0x13C }
+  - { offsetInCU: 0x2B9, offset: 0x2B9, size: 0x8, addend: 0x0, symName: _Svolgi_Operazione, symObjAddr: 0x918, symBinAddr: 0x1000027B8, symSize: 0x660 }
+  - { offsetInCU: 0x430, offset: 0x430, size: 0x8, addend: 0x0, symName: _Cod_Operazione_Ordinamento, symObjAddr: 0xF90, symBinAddr: 0x100002E30, symSize: 0x168 }
+  - { offsetInCU: 0x458, offset: 0x458, size: 0x8, addend: 0x0, symName: _Ordina, symObjAddr: 0x10F8, symBinAddr: 0x100002F98, symSize: 0x148 }
+  - { offsetInCU: 0x4DE, offset: 0x4DE, size: 0x8, addend: 0x0, symName: _ricerca_tratta, symObjAddr: 0x1240, symBinAddr: 0x1000030E0, symSize: 0x2E8 }
+  - { offsetInCU: 0x571, offset: 0x571, size: 0x8, addend: 0x0, symName: _Conv_data, symObjAddr: 0x1528, symBinAddr: 0x1000033C8, symSize: 0x48 }
+  - { offsetInCU: 0x5C3, offset: 0x5C3, size: 0x8, addend: 0x0, symName: _Converti, symObjAddr: 0x1570, symBinAddr: 0x100003410, symSize: 0x33C }
+  - { offsetInCU: 0x62D, offset: 0x62D, size: 0x8, addend: 0x0, symName: _ComparaStringhe, symObjAddr: 0x18C0, symBinAddr: 0x100003760, symSize: 0x268 }
+...
