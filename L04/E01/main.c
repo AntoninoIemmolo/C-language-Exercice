@@ -120,7 +120,7 @@ void Wrap_Stampa_Combinazione(int* scelte,int iniz,int cnt){
 }
 void Stampa_Combinazione(int* scelte,int iniz){
 	if(iniz>=n) return;
-	if(*(scelte+iniz)))
+	if(*(scelte+iniz))
 		printf("%d ",iniz);
 	Stampa_Combinazione(scelte, iniz+1);
 	return;
