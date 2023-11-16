@@ -17,6 +17,7 @@ int main (int argi,char* argv[]){
 	int tmp,dim=-1;
 	Fin=fopen("att.txt","r");
 	fscanf(Fin,"%d ",&tmp);
+	//Dynamic allocation of v, free at line:30
 	v=(att*)malloc(tmp*sizeof(att));
 	for(int i=0;i<tmp;i++){
 		fscanf(Fin,"%d %d ",&v[i].s,&v[i].f);
@@ -26,6 +27,7 @@ int main (int argi,char* argv[]){
 	}
 	printf("\n");
 	Wrap_attSel(tmp,v,&dim);
+	free(v);
 	fclose(Fin);
 	return dim;
 }
@@ -36,6 +38,7 @@ void Wrap_attSel(int N, att *v,int *dim){
 	int VetS[N];
 	int *pSol=NULL;
 	for(int i=0;i<N;i++) VetS[i]=1;
+	//Dynamic allocation of pSol, free at line: 49
 	pSol=(int*)malloc(N*sizeof(int));
 	attSel(0,N,v,VetS,dim,pSol);
 	for(int i=0;i<N;i++){
@@ -43,6 +46,7 @@ void Wrap_attSel(int N, att *v,int *dim){
 			printf("(%d,%d)",v[i].s,v[i].f);
 		}
 	}
+	free(pSol);
 	return;
 }
 void attSel(int prof,int N,att *v,int *VetS,int *dim,int* pSol){
