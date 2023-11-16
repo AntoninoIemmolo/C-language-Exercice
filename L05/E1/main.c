@@ -26,6 +26,7 @@ int main (int argi,char* argv[]){
 	}
 	printf("\n");
 	Wrap_attSel(tmp,v,&dim);
+	free(v);
 	fclose(Fin);
 	return dim;
 }
@@ -43,6 +44,7 @@ void Wrap_attSel(int N, att *v,int *dim){
 			printf("(%d,%d)",v[i].s,v[i].f);
 		}
 	}
+	free(pSol);
 	return;
 }
 void attSel(int prof,int N,att *v,int *VetS,int *dim,int* pSol){
