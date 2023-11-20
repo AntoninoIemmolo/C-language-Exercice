@@ -29,7 +29,7 @@ int main(void){
 	if(NULL==fin)
 		return -1;
 	fscanf(fin,"%d ",&NRighe);
-	for(int i=0;i<NRighe;i++){
+	for(int i=0;i<2;i++){
 		printf("======TEST:%d=======\n",i+1);
 		fscanf(fin,"%d %d %d %d ",&Disp[0],&Disp[1],&Disp[2],&Disp[3]);
 		printf("Z:%d R:%d T:%d S:%d \n",Disp[0],Disp[1],Disp[2],Disp[3]);
@@ -49,7 +49,7 @@ void wrap_ricerca(int* disp){
 	col.conf=(char*)malloc((disp[0]+disp[1]+disp[2]+disp[3])*sizeof(char));
 	//dynamic allocation of sol free at line: 76
 	sol=(collana*)malloc(sizeof(collana));
-	//dynamic allocation of best free at line: 75
+	//dynamic allocation of sol->conf free at line: 75
 	sol->conf=(char*)malloc((disp[0]+disp[1]+disp[2]+disp[3])*sizeof(char));
 	vetPietre[0].CPietra='z';
 		vetPietre[0].next.z=1;
