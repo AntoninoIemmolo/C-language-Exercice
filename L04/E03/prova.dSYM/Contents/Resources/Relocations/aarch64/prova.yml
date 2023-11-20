@@ -1,0 +1,10 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     prova
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x10000368C, symSize: 0x1AC }
+  - { offsetInCU: 0x87, offset: 0x87, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x10000368C, symSize: 0x1AC }
+  - { offsetInCU: 0xE7, offset: 0xE7, size: 0x8, addend: 0x0, symName: _wrap_ricerca, symObjAddr: 0x1AC, symBinAddr: 0x100003838, symSize: 0x198 }
+  - { offsetInCU: 0x135, offset: 0x135, size: 0x8, addend: 0x0, symName: _ricerca, symObjAddr: 0x344, symBinAddr: 0x1000039D0, symSize: 0x3E4 }
+  - { offsetInCU: 0x1AD, offset: 0x1AD, size: 0x8, addend: 0x0, symName: _terminaz, symObjAddr: 0x728, symBinAddr: 0x100003DB4, symSize: 0xFC }
+...
