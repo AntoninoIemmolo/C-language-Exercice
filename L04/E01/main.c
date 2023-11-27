@@ -7,7 +7,6 @@ typedef struct{
 	int *archi;
 }type_node;
 
-
 type_node** File_Reader(FILE* fin);
 type_node* node_allocation();
 void Cerca_Combin(type_node** vet_nodi,int* scelte,int prof,int *i);
