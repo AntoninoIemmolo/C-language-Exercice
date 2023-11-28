@@ -1,10 +1,9 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 typedef struct{
 	int s;
 	int f;
 }att;
-
 
 void Wrap_attSel(int N, att *v,int *dim);
 int Calcola_Dim(int *VetS,int n,att* v);
@@ -15,17 +14,13 @@ int main (int argi,char* argv[]){
 	FILE* Fin;
 	att *v;
 	int tmp,dim=-1;
-	Fin=fopen("att.txt","r");
+	Fin=fopen("../input files/E1/att1.txt","r");
 	fscanf(Fin,"%d ",&tmp);
 	//Dynamic allocation of v, free at line:30
 	v=(att*)malloc(tmp*sizeof(att));
 	for(int i=0;i<tmp;i++){
 		fscanf(Fin,"%d %d ",&v[i].s,&v[i].f);
 	}
-	for(int i=0;i<tmp;i++){
-		printf("(%d)(%d %d)    ",i,v[i].s, v[i].f);
-	}
-	printf("\n");
 	Wrap_attSel(tmp,v,&dim);
 	free(v);
 	fclose(Fin);
@@ -79,7 +74,6 @@ int controlla_sol(int *VetS,int n,att* v){
 		}
 	}
 	return 1;
-
 }
 int Calcola_Dim(int *VetS,int n,att* v){
 	int dim=0;
@@ -90,5 +84,3 @@ int Calcola_Dim(int *VetS,int n,att* v){
 	}
 	return dim;
 }
-
-
