@@ -44,12 +44,12 @@ int main(void){
 	stampa_mat(dimR,dimC);
 	free(vetTessere);
 	free(vetScelte);
-	for(int i=0;i<*dimR;i++){
+	for(int i=0;i<dimR;i++){
 		free(WrBoard.mat[i]);
-		free(WeBest.mat[i]);
+		free(WrBest.mat[i]);
 	}
 	free(WrBoard.mat);
-	free(WeBest.mat);
+	free(WrBest.mat);
 	return 0;
 }
 
