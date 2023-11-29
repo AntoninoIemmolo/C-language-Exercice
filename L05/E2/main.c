@@ -42,6 +42,14 @@ int main(void){
 	if(nTessere==-1) return -1;
 	gen_sol(0,0,nTessere,dimR,dimC,vetTessere,vetScelte);
 	stampa_mat(dimR,dimC);
+	free(vetTessere);
+	free(vetScelte);
+	for(int i=0;i<*dimR;i++){
+		free(WrBoard.mat[i]);
+		free(WeBest.mat[i]);
+	}
+	free(WrBoard.mat);
+	free(WeBest.mat);
 	return 0;
 }
 
@@ -51,8 +59,10 @@ int leggifile(FILE* fileTessere,FILE* fileScac,tessera** vetTessere,int* dimR,in
 	fileTessere=fopen("./tiles.txt","r");
 	fileScac=fopen("./board.txt","r");
 	if(fileScac==NULL||fileTessere==NULL) return -1;
+	//free ar line 45 
 	*vetTessere=(tessera*)malloc(9*sizeof(tessera));
 	fscanf(fileTessere,"%d ",&t);
+	//free ar line 46 
 	*vetScelte=(int*)malloc(t*sizeof(int));
 	//lettura di tutte le tessere
 	for(int i=0;i<t;i++){
@@ -65,8 +75,10 @@ int leggifile(FILE* fileTessere,FILE* fileScac,tessera** vetTessere,int* dimR,in
 	}
 	//leggo la board
 	fscanf(fileScac,"%d %d ",dimR,dimC);
+	//free at line 51 
 	(WrBoard.mat)=(tessera***)malloc((*dimR)*sizeof(tessera**));
 	for(int i=0;i<*dimR;i++){
+		//free ar line 48
 		WrBoard.mat[i]=(tessera**)malloc((*dimC)*sizeof(tessera*));
 	}
 	for(int i=0;i<*dimR;i++){
@@ -80,8 +92,10 @@ int leggifile(FILE* fileTessere,FILE* fileScac,tessera** vetTessere,int* dimR,in
 			}
 		}
 	}
+	//free ar line 51
 	WrBest.mat=(tMat)malloc((*dimR)*sizeof(*WrBest.mat));
 	for(int i=0;i<*dimR;i++){
+		//free ar line 49 
 		WrBest.mat[i]=(tessera*)malloc((*dimC)*sizeof(**WrBest.mat));
 	}
 	
