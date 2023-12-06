@@ -24,15 +24,15 @@ void bubbleSort(int n){
             break;
     }
 }
-int* ind_gen(int dim);
-int calc_sol(int* vet_ind,int ind,int dim,int* sol);
-int* wr_calc_sol(int* vet_ind,int dim);
+
+int* ind_gen(int len,int* PBest);
+int calc_sol(int* vet_ind,int ind,int dim);
 
 int main (int argi,char* argv[]){
 	FILE* Fin;
 	int tmp,dim=-1;
 	int* vetScelte=NULL;
-	int* sol=NULL;
+	int IndSol;
 	//Opening od Fin close at line: 
 	Fin=fopen("./att1.txt","r");
 	fscanf(Fin,"%d ",&dim);
@@ -42,15 +42,14 @@ int main (int argi,char* argv[]){
 		fscanf(Fin,"%d %d ",&vInter[i].s,&vInter[i].f);
 	}
 	bubbleSort(dim);
-	vetScelte=ind_gen(dim);
-	sol=wr_calc_sol(vetScelte,dim);
-
-	for(int i=0;i<dim;i++){
-		if(sol[i]!=-1)
-			printf("%d %d\n",vInter[i].s,vInter[i].f);
+	vetScelte=ind_gen(dim,&IndSol);
+	while(IndSol!=-1){
+		printf("%d, %d",vInter[IndSol].s,vInter[IndSol].f);
+		IndSol=vetScelte[IndSol];
+		printf("||");
 	}
-	
 	free(vInter);
+	free(vetScelte);
 	fclose(Fin);
 	return 0;
 }
@@ -58,56 +57,44 @@ int comp(int ind1,int ind2){
 	if(vInter[ind1].s<vInter[ind2].f&&vInter[ind2].s<vInter[ind1].f){
 		//0=NON compatibili
 		return 0;
-
 	}
 	//1=compatibili
 	return 1;
 }
 
-int* ind_gen(int dim){
+int* ind_gen(int len,int* PBest){
 	int* vet_ind;
-	int flag=0;
+	int flag=0,dim=-1,LocBestDim=INT_MIN,BestDim=INT_MIN,tmp;
 	//free at line:
-	vet_ind=(int*)malloc(dim*sizeof(int));
-	for(int i=0;i<dim;i++){
+	vet_ind=(int*)malloc(len*sizeof(int));
+	for(int i=0;i<len;i++){
 		flag=0;
+		LocBestDim=INT_MIN;
 		for(int j=0;j<i;j++){
 			if(comp(i,j)){
+				tmp=vet_ind[i];
 				vet_ind[i]=j;
+				dim=calc_sol(vet_ind,i,0);
+				if(dim>LocBestDim)
+					LocBestDim=dim;
+				else
+					vet_ind[i]=tmp;
 				flag=1;
 			}
+		}
+		if(LocBestDim>BestDim){
+			BestDim=LocBestDim;
+			*PBest=i;
 		}
 		if(!flag)
 			vet_ind[i]=-1;
 	}
 	return vet_ind;
 }
-//per ogni elemento prende il suo indice corrispondente e calcola la dimensione della soluzione associata
-//ritorna la soluzione a valore massimo
-int *wr_calc_sol(int* vet_ind,int dim){
-	int* sol=malloc(dim*sizeof(int));
-	int* sol_parz=malloc(dim*sizeof(int));
-	int val=INT_MIN,val_parz;
-	for(int i=0;i<dim;i++){
-		sol_parz[i]=-1;
-		sol[i]=-1;
-	}
-	for(int i=dim-1;i>=0;i--){
-		val_parz=calc_sol(vet_ind,i,0,sol_parz);
-		if(val<val_parz){
-			val=val_parz;
-			for(int j=0;j<dim;j++){
-				sol[j]=sol_parz[j];
-				sol_parz[j]=-1;
-			}
-		}
-	}
-	return sol;
-}
-int calc_sol(int* vet_ind,int ind,int dim,int* sol){
+
+int calc_sol(int* vet_ind,int ind,int dim){
 	if(-1==ind){
 		return dim;
 	}
-	sol[ind]=ind;
-	return dim+calc_sol(vet_ind,vet_ind[ind],dim=dim+(vInter[ind].f-vInter[ind].s),sol);
+	return calc_sol(vet_ind,vet_ind[ind],dim=dim+(vInter[ind].f-vInter[ind].s));
 }	
