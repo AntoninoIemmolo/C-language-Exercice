@@ -33,10 +33,10 @@ int main (int argi,char* argv[]){
 	int tmp,dim=-1;
 	int* vetScelte=NULL;
 	int IndSol;
-	//Opening od Fin close at line: 
+	//Opening od Fin close at line: 53
 	Fin=fopen("./att1.txt","r");
 	fscanf(Fin,"%d ",&dim);
-	//Dynamic allocation of v, free at line:
+	//Dynamic allocation of v, free at line: 51
 	vInter=malloc(dim*sizeof(*vInter));
 	for(int i=0;i<dim;i++){
 		fscanf(Fin,"%d %d ",&vInter[i].s,&vInter[i].f);
@@ -65,7 +65,7 @@ int comp(int ind1,int ind2){
 int* ind_gen(int len,int* PBest){
 	int* vet_ind;
 	int flag=0,dim=-1,LocBestDim=INT_MIN,BestDim=INT_MIN,tmp;
-	//free at line:
+	//free at line: 52
 	vet_ind=(int*)malloc(len*sizeof(int));
 	for(int i=0;i<len;i++){
 		flag=0;
