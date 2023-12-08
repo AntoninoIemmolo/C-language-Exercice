@@ -19,10 +19,10 @@ struct WRVETOGG{
 	int dim;
 }WR_VetOgg;
 
-
 void EQ_FileRead(FILE* FEq){
 	int NRig=-1;
 	fscanf(FEq,"%d",&NRig);
+    //free at line
 	WR_VetOgg.VetOgg=malloc(NRig*sizeof(struct OGG));
 	WR_VetOgg.dim=NRig;
 	for(int i=0;i<NRig;i++){
@@ -59,5 +59,8 @@ void EQ_Print(char* name){
 		printf("%10s MAG:%d\n","",target->stat.mag);
 		printf("%10s SPR:%d\n","",target->stat.spr);
 	}
-
+}
+void EQ_Free(void){
+    free(WR_VetOgg.VetOgg);
+    return;
 }

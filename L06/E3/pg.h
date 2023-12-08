@@ -10,3 +10,4 @@ NODE* PG_Pop(char* key);
 NODE* PG_Find(char *key);
 void PG_InvIns(char *key, char* NomeOgg);
 void PG_InvPop(char *key, char* NomeOgg);
+void PG_Free(char* key);
