@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define PERCORSO "../input files/E3/hard_test_set.txt"
+
 //struttura collana contenente la configurazion della collana e la dimensione della stessa
 typedef struct{
 	char* conf;
