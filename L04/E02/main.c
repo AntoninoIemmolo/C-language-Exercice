@@ -33,10 +33,10 @@ int main(int argv,char* argc[]){
 	int code=1,flag=1;
 	char FilePath[50]="../input files/E2/anag1.txt\0",string[50];
 	char data1[11], data2[11];
-	FILE* FOut=fopen("./out.txt","w");
+	FILE* FOut;
 	File_Reader(FilePath,&Head);
 	while(code!=0){
-		printf("\niserire l'operazione chi si vuole svolgere\nqui\nquitt\nacquisizione\nricerca\ncancellazione\nstampa\n==>");
+		printf("\niserire l'operazione chi si vuole svolgere\nquit\nacquisizione\nricerca\ncancellazione\nstampa\n==>");
 		scanf("%s",string);
 		code=Converti_Operazione(string);
 		switch(code){
@@ -105,7 +105,9 @@ int main(int argv,char* argc[]){
 					}
 				}
 				break;
+            //caso stampa
 			case(4):
+                FOut=fopen("./out.txt","w");
 				for(link x=Head;x!=NULL;x=x->next){
 					fprintf(FOut,"codice:%s nome: %s cognome: %s data di nasciata: %s via: %s ",x->codice,
 								x->nome, x->cognome, x->data, x->via);
@@ -249,7 +251,7 @@ link LISTPop(link *PHead,char* string){
 		*PHead=ris->next;
 	}
 	for(;flag&&(*x)->next!=ris;x=&((*x)->next)){
-		printf("%s\n",(*x)->codice);
+		//printf("%s\n",(*x)->codice);
 	}
 	if(flag)
 		(*x)->next=(*x)->next->next;
