@@ -110,7 +110,7 @@ void Cerca_Combin(type_node** vet_nodi,int* scelte,int prof,int *i){
 	return;
 }
 void Wrap_Stampa_Combinazione(int* scelte,int iniz,int cnt){
-	printf("[%d]=>",cnt);
+	printf("[%d]=>",cnt+1);
 	printf("(");
 	Stampa_Combinazione(scelte, iniz);
 	printf(")\n");
