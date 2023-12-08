@@ -157,12 +157,13 @@ void PG_Free(char* key){
         if(NULL==node)
             return;
         NodNext=node->next;
-        for(;NodNext->next==NULL;node=NodNext){
-            printf("Lbero pg:%s",node->pg.code);
+        for(;NodNext->next!=NULL;node=NodNext){
+            //printf("Libero pg:%s\n",node->pg.code);
             NodNext=node->next;
             free(node->pg.PWrEquip);
             free(node);
         }
+        //printf("Libero pg:%s\n",node->pg.code);
         free(node->pg.PWrEquip);
         free(node);
         EQ_Free();

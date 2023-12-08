@@ -5,17 +5,16 @@
 int main(){
 	FILE* FPg=fopen("../input files-6/E3/pg.txt","r");
 	FILE* FInv=fopen("../input files-6/E3/inventario.txt","r");
-    int scelta=1,hp,mg,atk,def,mag,spr;
-    char chiave[50], chiave2[50],codice[7],nom1[50],nom2[50];
-
+	int scelta=1,hp,mg,atk,def,mag,spr;
+	char chiave[50], chiave2[50],codice[7],nom1[50],nom2[50];
 	if(NULL==FPg||NULL==FInv)
 		return -1;
 	PG_FileRead(FPg);
 	EQ_FileRead(FInv);
-    while(scelta!=0){
+        while(scelta!=0){
         printf("\nOperazioni:\n");
         printf("1) stampa\n2) modifica equipaggiameti\n");
-       printf("3) inserimeto/cancellazione di un personaggio\n==>");
+        printf("3) inserimeto/cancellazione di un personaggio\n==>");
         scanf("%d",&scelta);
         switch(scelta){
             //caso 1 stampa 
@@ -81,19 +80,9 @@ int main(){
                 break;
         }
     }
-/*
-	PG_InvIns("PG0003","Excalibur");
-	PG_InvIns("PG0003","Filatterio");
-	PG_InvIns("PG0003","Pendragon");
-	PG_InvIns("PG0003","AmmazzaDraghi");
-	PG_InvIns("PG0003","CorazzaAdamantina");
-	PG_InvIns("PG0003","Oricalco");
-	PG_InvIns("PG0003","Tempesta");
-	PG_InvIns("PG0003","Maximillian");
-	PG_InvIns("PG0003","DagaRunica");
-	PG_InvIns("PG0003","ArmillaDiDiamante");
-	PG_Print("PG0003");*/
-    PG_Free("\0");
+   PG_Free("\0");
+   fclose(FPg);
+   fclose(FInv);
 	return 0;
 }
 
