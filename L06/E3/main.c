@@ -5,8 +5,8 @@
 #include "pg.h"
 
 int main(){
-	FILE* FPg=fopen("../input files-6/E3/pg.txt","r");
-	FILE* FInv=fopen("../input files-6/E3/inventario.txt","r");
+	FILE* FPg=fopen("./pg.txt","r");
+	FILE* FInv=fopen("./inventario.txt","r");
 	int scelta=1,hp,mg,atk,def,mag,spr;
 	char chiave[50], chiave2[50],codice[7],nom1[50],nom2[50];
 	if(NULL==FPg||NULL==FInv)
