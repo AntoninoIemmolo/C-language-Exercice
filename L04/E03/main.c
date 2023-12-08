@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define PERCORSO "../input files/E3/hard_test_set.txt"
+#define PERCORSO "./easy_test_set.txt"
 
 //struttura collana contenente la configurazion della collana e la dimensione della stessa
 typedef struct{
@@ -9,33 +9,30 @@ typedef struct{
 	int dim;
 }collana;
 
-void wrap_ricerca(int* disp,FILE* fout);
+void wrap_ricerca(int* disp);
 int ricerca(int prof,collana *col,int *disp,int** matPietre,collana *best,int prec,int target);
 void terminaz(collana *col,collana *best);
 
 //genero il file out.txt solo per confrontare la soluzione generata con i risultati attesi usando un programma esterno
 int main(void){
 	FILE* fin=fopen(PERCORSO,"r");
-	FILE* fout=fopen("./out.txt","w");;
 	int NRighe=-1;
 	int Disp[4];
 	if(NULL==fin)
 		return -1;
 	fscanf(fin,"%d ",&NRighe);
-	fprintf(fout,"%d\n",NRighe);
 	for(int i=0;i<NRighe;i++){
 		printf("======TEST:%d=======\n",i+1);
 		fscanf(fin,"%d %d %d %d ",&Disp[0],&Disp[1],&Disp[2],&Disp[3]);
 		printf("Z:%d R:%d T:%d S:%d \n",Disp[0],Disp[1],Disp[2],Disp[3]);
-		wrap_ricerca(Disp,fout);
+		wrap_ricerca(Disp);
 		printf("===================\n");
 	}
 	fclose(fin);
-	fclose(fout);
 	return 0;
 }
 //inizializza tutte le strutture necessaria per la corretta generazione della solizione
-void wrap_ricerca(int* disp,FILE* fout){
+void wrap_ricerca(int* disp){
 	collana col,*sol;
 	int **matPietre;
 	col.dim=0;
@@ -69,13 +66,11 @@ void wrap_ricerca(int* disp,FILE* fout){
 
 	//generazione delle regole per ogni regola 
 	for(int i=1;i<=dimMax;i++){
-		printf("==%d==\n",i);
 		if(ricerca(0,&col,disp,matPietre,sol,-1,i)==0)
 			break;
 
 	}
 	printf("SOLUZIONE MIGLIORE:\nDIM: %d\n",sol->dim);
-	fprintf(fout,"%d\n",sol->dim);
 	for(int i=0;i<sol->dim;i++){
 		printf("%c ",sol->conf[i]);
 	}
