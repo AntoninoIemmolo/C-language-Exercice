@@ -14,7 +14,7 @@ int main (int argi,char* argv[]){
 	FILE* Fin;
 	att *v;
 	int tmp,dim=-1;
-	Fin=fopen("../input files/E1/att1.txt","r");
+	Fin=fopen("./att.txt","r");
 	fscanf(Fin,"%d ",&tmp);
 	//Dynamic allocation of v, free at line:30
 	v=(att*)malloc(tmp*sizeof(att));
