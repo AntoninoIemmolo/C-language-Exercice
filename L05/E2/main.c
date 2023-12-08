@@ -53,7 +53,6 @@ int main(void){
 	return 0;
 }
 
-
 int leggifile(FILE* fileTessere,FILE* fileScac,tessera** vetTessere,int* dimR,int* dimC,int **vetScelte){
 	int t=-1,s=-1,ind=-1;
 	fileTessere=fopen("./tiles.txt","r");
