@@ -31,7 +31,7 @@ int main(int argv,char* argc[]){
 	link Head=NULL,ris=NULL;
 	link tmp=NULL;
 	int code=1,flag=1;
-	char FilePath[50]="../input files/E2/anag1.txt\0",string[50];
+	char FilePath[50]="./anag1.txt",string[50];
 	char data1[11], data2[11];
 	FILE* FOut;
 	File_Reader(FilePath,&Head);
