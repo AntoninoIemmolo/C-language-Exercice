@@ -6,6 +6,7 @@ struct INTER {
 	int f;
 };
 
+
 struct INTER *vInter;
 void bubbleSort(int n){
     struct INTER tmp;
