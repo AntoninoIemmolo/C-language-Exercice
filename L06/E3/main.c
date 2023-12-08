@@ -1,5 +1,7 @@
 #include <stdio.h>
+#define _STDIO
 #include <stdlib.h>
+#define _STDLIB 
 #include "pg.h"
 
 int main(){

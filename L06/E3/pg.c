@@ -1,7 +1,4 @@
 #include "pg.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 struct PG{
 	char code[7];

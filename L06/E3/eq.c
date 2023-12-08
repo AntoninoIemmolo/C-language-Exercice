@@ -1,7 +1,4 @@
 #include "eq.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 struct OGG{
 	char nome[50];
 	char tipo[50];
