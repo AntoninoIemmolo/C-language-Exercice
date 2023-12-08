@@ -58,7 +58,11 @@ int leggifile(FILE* fileTessere,FILE* fileScac,tessera** vetTessere,int* dimR,in
 	int t=-1,s=-1,ind=-1;
 	fileTessere=fopen("./tiles.txt","r");
 	fileScac=fopen("./board.txt","r");
-	if(fileScac==NULL||fileTessere==NULL) return -1;
+	if(fileScac==NULL||fileTessere==NULL){
+        fclose(fileScac);
+        fclose(fileTessere);
+        return -1;
+    }
 	//free ar line 45 
 	*vetTessere=(tessera*)malloc(9*sizeof(tessera));
 	fscanf(fileTessere,"%d ",&t);
@@ -98,8 +102,9 @@ int leggifile(FILE* fileTessere,FILE* fileScac,tessera** vetTessere,int* dimR,in
 		//free ar line 49 
 		WrBest.mat[i]=(tessera*)malloc((*dimC)*sizeof(**WrBest.mat));
 	}
-	
 	WrBest.val=-1;
+    fclose(fileScac);
+    fclose(fileTessere);
 	return t;
 }
 void gen_sol(int profR,int profC,int nTessere,int dimR,int dimC,tessera* vetTessere,int* vetScelte){
