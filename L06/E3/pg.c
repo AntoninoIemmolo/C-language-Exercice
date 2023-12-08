@@ -158,6 +158,7 @@ void PG_Free(char* key){
             return;
         NodNext=node->next;
         for(;NodNext->next==NULL;node=NodNext){
+            printf("Lbero pg:%s",node->pg.code);
             NodNext=node->next;
             free(node->pg.PWrEquip);
             free(node);
