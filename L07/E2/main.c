@@ -45,7 +45,6 @@ void Gen_Prog_R(int prof,struct NodeDiag* head,struct NodeDiag* sol,
         struct NodeDiag* best,int dif,float *ValBest);
 float Prog_Eval(struct NodeDiag* sol,struct NodeDiag* best,float ValBest);
 
-
 int main(void){
     int cont=0,dif=0;
     if(LeggiFile()==-1)
