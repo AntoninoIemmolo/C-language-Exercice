@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #define PATH "./elementi.txt"
-#define DD 10
-#define DP 20
+#define DD 12
+#define DP 30
 
 struct accrob{
     char nome[100];
@@ -53,12 +53,11 @@ int main(void){
     struct NodeDiag* sol=(struct NodeDiag*)malloc(sizeof(struct NodeDiag)); 
     Gen_Diag(&head);
     Gen_Prog(head,sol);
-    printf("===soluzione  val:%f ===\n",conta);
-    printf("===soluzione===\n");
+    printf("===soluzione  val:%.2f ===\n",conta);
     for(struct NodeDiag* l=sol;l!=NULL;l=l->link,cont++){
-        printf("diagonali %d \n",cont);
+        printf("diagonali %d ,",cont+1);
         dif=dif+l->diag.dif;
-        printf("DIF :%d\n",l->diag.dif);
+        printf("DIF :%d VAL:%.2f \n",l->diag.dif,l->diag.val);
         for(int j=0;j<l->diag.dim;j++){
             printf("%s, ",l->diag.VAccrob[j].nome);
         }
@@ -98,12 +97,32 @@ struct diag Gen_Diag(struct NodeDiag** head){
     diag.val=0;
     diag.dim=0;
     Gen_Diag_R(0,diag,0,head);
+    for(struct NodeDiag* l=*head;l!=NULL;l=l->link){
+        if(strcmp(l->diag.VAccrob[0].nome,"rondata")==0)
+            if(strcmp(l->diag.VAccrob[1].nome,"arabian")==0){
+                if(strcmp(l->diag.VAccrob[2].nome,"front_tuck")==0){
+                    for(int i=0;i<l->diag.dim;i++)
+                        printf("%15s,",l->diag.VAccrob[i].nome);
+                    printf("\n");
+                }
+            }
+    }
+    printf("FINE GENERAZIONE DIAGONALI\n");
     return diag;
 }
 void Gen_Diag_R(int prof,struct diag diag,int FlagFine,struct NodeDiag **head){
    struct accrob* PosList,*tmp;
+   int FlagSeq=0;
     if(prof>=5||FlagFine){
         diag.dim=prof;
+
+        if(strcmp(diag.VAccrob[0].nome,"rondata")==0)
+            if(strcmp(diag.VAccrob[1].nome,"arabian")==0){
+                if(strcmp(diag.VAccrob[2].nome,"front_tuck")==0){
+                    if(diag.dim==3)
+                        printf("\n===generata===\n");
+                }
+            }
         Diag_Store(diag,head);
         return;
     }
@@ -113,15 +132,19 @@ void Gen_Diag_R(int prof,struct diag diag,int FlagFine,struct NodeDiag **head){
         diag.VAccrob[prof] = *l;
         if(l->tipo==2){
             diag.FAccrob.avnt=1;
-            if(prof>0&&((diag.VAccrob[prof-1].tipo==1)||(diag.VAccrob[prof-1].tipo==2)))
+            if(prof>0&&((diag.VAccrob[prof-1].tipo==1)||(diag.VAccrob[prof-1].tipo==2))){
                 diag.FAccrob.accrobSeq=1;
+                FlagSeq=1;
+            }
             else
                 diag.FAccrob.accrobSeq=0;
         }
         if(l->tipo==1){
             diag.FAccrob.ind=1;
-            if(prof>0&&((diag.VAccrob[prof-1].tipo==1)||(diag.VAccrob[prof-1].tipo==2)))
+            if(prof>0&&((diag.VAccrob[prof-1].tipo==1)||(diag.VAccrob[prof-1].tipo==2))){
                 diag.FAccrob.accrobSeq=1;
+                FlagSeq=1;
+            }
             else
                 diag.FAccrob.accrobSeq=0;
         }
@@ -134,12 +157,15 @@ void Gen_Diag_R(int prof,struct diag diag,int FlagFine,struct NodeDiag **head){
         Gen_Diag_R(prof+1,diag,l->fin,head);
         if(diag.VAccrob[prof].tipo==2){
             diag.FAccrob.avnt=0;
-            diag.FAccrob.accrobSeq=0;
+            if(FlagSeq)
+                diag.FAccrob.accrobSeq=0;
         }
         if(diag.VAccrob[prof].tipo==1){
             diag.FAccrob.ind=0;
-            diag.FAccrob.accrobSeq=0;
+            if(FlagSeq)
+                diag.FAccrob.accrobSeq=0;
         }
+        FlagSeq=0;
     }
 
     //ramo liberazione possibili accrobazie
@@ -159,10 +185,7 @@ void Diag_Store(struct diag diag,struct NodeDiag **head){
         point=point+diag.VAccrob[i].val;
         dif=dif+diag.VAccrob[i].dif;
     } 
-    if(diag.VAccrob[diag.dim-1].dif>=8)
-        point=point*1.5; 
-
-    if(dif>=DD||!(diag.FAccrob.ind==0||diag.FAccrob.avnt==0))
+    if(dif>DD||(diag.FAccrob.ind==0&&diag.FAccrob.avnt==0))
         return;
 
     tmp=*head;
@@ -234,7 +257,7 @@ void Gen_Prog_R(int prof,struct NodeDiag* head,struct NodeDiag* sol,
             sol=malloc(sizeof(*sol));
             sol->link=tmp;
             sol->diag=l->diag;
-            Gen_Prog_R(prof+1,head,sol,best,dif+l->diag.dif,ValBest);
+            Gen_Prog_R(prof+1,l,sol,best,dif+l->diag.dif,ValBest);
             //uso tmp per la liberazione di sol
             sol->link=tmp;
             free(sol);
@@ -249,7 +272,10 @@ float Prog_Eval(struct NodeDiag* sol,struct NodeDiag* best,float ValBest){
     float ValCurr=0;
     struct NodeDiag *tmp,*j;
     for(struct NodeDiag* l=sol;l!=NULL;l=l->link){
-        ValCurr=ValCurr+sol->diag.val;
+        ValCurr=ValCurr+l->diag.val;
+        if(l->link==NULL&&l->diag.VAccrob[l->diag.dim-1].val>=8){
+            ValCurr=ValCurr+l->diag.val*0.5;
+        }
         if(l->diag.FAccrob.ind)
             flagInd=1;
         if(l->diag.FAccrob.avnt)
