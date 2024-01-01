@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #define PATH "./elementi.txt"
-#define DD 12
-#define DP 30
+#define DD 10
+#define DP 20
 
 struct accrob{
     char nome[100];
@@ -44,12 +44,13 @@ void Gen_Prog(struct NodeDiag* head,struct NodeDiag* sol);
 void Gen_Prog_R(int prof,struct NodeDiag* head,struct NodeDiag* sol,
         struct NodeDiag* best,int dif,float *ValBest);
 float Prog_Eval(struct NodeDiag* sol,struct NodeDiag* best,float ValBest);
+void FreeMat();
 
 int main(void){
     int cont=0,dif=0;
     if(LeggiFile()==-1)
         return -1;
-    struct NodeDiag* head=NULL; 
+    struct NodeDiag* head=NULL,*tmp=NULL; 
     struct NodeDiag* sol=(struct NodeDiag*)malloc(sizeof(struct NodeDiag)); 
     Gen_Diag(&head);
     Gen_Prog(head,sol);
@@ -63,7 +64,17 @@ int main(void){
         }
         printf("\n========================\n");
     }
-        printf("DIF TOT:%d",dif);
+    for(struct NodeDiag* l=head;l!=NULL;l=tmp){
+	tmp=l->link;
+	free(l);
+	    oree(l);
+    }
+
+    for(struct NodeDiag* l=sol;l!=NULL;l=tmp){
+	    tmp=l->link;
+	    free(l);
+    }
+    FreeMat();
     return 0;
 }
 
@@ -89,6 +100,7 @@ int LeggiFile(){
         MAT[tipo][DirIn][DirUs][ReqPrec]->tipo=tipo;
         strcpy(MAT[tipo][DirIn][DirUs][ReqPrec]->nome,nome);
     }
+    fclose(FIn);
     return 0;
 }
 
@@ -97,6 +109,7 @@ struct diag Gen_Diag(struct NodeDiag** head){
     diag.val=0;
     diag.dim=0;
     Gen_Diag_R(0,diag,0,head);
+    /*
     for(struct NodeDiag* l=*head;l!=NULL;l=l->link){
         if(strcmp(l->diag.VAccrob[0].nome,"rondata")==0)
             if(strcmp(l->diag.VAccrob[1].nome,"arabian")==0){
@@ -106,7 +119,7 @@ struct diag Gen_Diag(struct NodeDiag** head){
                     printf("\n");
                 }
             }
-    }
+    }*/
     printf("FINE GENERAZIONE DIAGONALI\n");
     return diag;
 }
@@ -115,7 +128,7 @@ void Gen_Diag_R(int prof,struct diag diag,int FlagFine,struct NodeDiag **head){
    int FlagSeq=0;
     if(prof>=5||FlagFine){
         diag.dim=prof;
-
+/*
         if(strcmp(diag.VAccrob[0].nome,"rondata")==0)
             if(strcmp(diag.VAccrob[1].nome,"arabian")==0){
                 if(strcmp(diag.VAccrob[2].nome,"front_tuck")==0){
@@ -123,6 +136,7 @@ void Gen_Diag_R(int prof,struct diag diag,int FlagFine,struct NodeDiag **head){
                         printf("\n===generata===\n");
                 }
             }
+	    */
         Diag_Store(diag,head);
         return;
     }
@@ -287,6 +301,10 @@ float Prog_Eval(struct NodeDiag* sol,struct NodeDiag* best,float ValBest){
     if(flagAvnt&&flagInd&&flagSeqAcc)
         if(ValBest<ValCurr){
             j=best;
+            for(struct NodeDiag* l=best;l!=NULL;l=tmp){
+		    tmp=l->link;
+		    free(l);
+	    }
             for(struct NodeDiag* l=sol;l!=NULL;l=l->link){
                 *j=*l;
                 if(l->link!=NULL){
@@ -299,4 +317,24 @@ float Prog_Eval(struct NodeDiag* sol,struct NodeDiag* best,float ValBest){
         }
     return ValBest;
 }
+
+//Mat[tipo][DirIng][DirUsc][ReqPrec]
+void FreeMat(){
+	struct accrob* tmp;
+	for(int i=0;i<3;i++)
+		for(int j=0;j<2;j++)
+			for(int k=0;k<2;k++)
+				for(int p=0;p<2;p++)
+            				for(struct accrob* l=MAT[i][j][k][p];l!=NULL;l=tmp){
+						tmp=l->link;
+						free(l);
+					}
+
+
+
+}
+
+
+
+
 
