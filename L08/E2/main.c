@@ -55,7 +55,6 @@ int main(int argc,char* argv[]){
         Act_Code=Act_Sel();
     }
     GR_free(gr);
-    free(gr);
     return 0;
 }
 

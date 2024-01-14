@@ -15,8 +15,6 @@
 #include <string.h>
 #endif
 
-
-
 struct SymbolTable{
     //composto per valore
     struct BSTnode *BST;
@@ -40,6 +38,7 @@ static void BST_printR(BST* head);
 static void ST_realloc(SmbTab st,int NewMax);
 static BST* ST_search_by_indexR(BST* head,int id);
 static BST* ST_selectR(BST* head,int *pos);
+static void BST_freeR(BST* head);
 
 SmbTab ST_init(int MaxDim){
     SmbTab st;
@@ -194,3 +193,21 @@ int ST_get_Id(SmbTab st,char* lab){
     else return -1;
 
 }
+void ST_free(SmbTab st){
+    BST_freeR(st->BST);
+}
+static void BST_freeR(BST* head){
+    if(head==NULL)
+        return;
+    BST_freeR(head->left);
+    BST_freeR(head->right);
+    free(head);
+    return;
+}
+
+
+
+
+
+
+

@@ -70,6 +70,8 @@ void GR_Load(Graph gr,char path[100],int flagMatList){
             gr->mat[id2][id1]=wh;
         }
     }
+    fclose(fin);
+    return;
 }
 
 Graph GR_init(int dim){
@@ -161,10 +163,11 @@ void GR_Gen_List(Graph gr){
 void GR_free(Graph gr){
     struct ad* tmp=NULL;
     if(gr->mat!=NULL){
-        for(int i=0;i<gr->NNode;i++)
+        for(int i=0;i<gr->NNode;i++){
             free(gr->mat[i]);
+	}
+    	free(gr->mat);
     }
-    free(gr->mat);
     if(gr->AdLst!=NULL){
         for(int i=0;i<gr->NNode;i++){
             for(struct ad* p=gr->AdLst[i];p!=NULL;p=tmp){
@@ -172,11 +175,11 @@ void GR_free(Graph gr){
                 free(p);
             }
         }
-
-
+	free(gr->AdLst);
     }
-    
-
+    ST_free(gr->st);
+    free(gr->st);
+    free(gr);
 }
 
 

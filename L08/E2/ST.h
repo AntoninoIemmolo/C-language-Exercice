@@ -7,3 +7,4 @@ void ST_print(SmbTab st);
 int ST_getDim(SmbTab st);
 void ST_select(SmbTab st,int pos,char* lab);
 int ST_get_Id(SmbTab st,char* lab);
+void ST_free(SmbTab st);
