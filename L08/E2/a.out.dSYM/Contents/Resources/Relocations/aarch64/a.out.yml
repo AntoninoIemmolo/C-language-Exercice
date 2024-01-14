@@ -1,0 +1,33 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     a.out
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _GR_Load, symObjAddr: 0x0, symBinAddr: 0x1000025F0, symSize: 0x400 }
+  - { offsetInCU: 0x4D, offset: 0x4D, size: 0x8, addend: 0x0, symName: _FlagMatList, symObjAddr: 0x24B4, symBinAddr: 0x100008000, symSize: 0x0 }
+  - { offsetInCU: 0xFD, offset: 0xFD, size: 0x8, addend: 0x0, symName: _GR_Load, symObjAddr: 0x0, symBinAddr: 0x1000025F0, symSize: 0x400 }
+  - { offsetInCU: 0x235, offset: 0x235, size: 0x8, addend: 0x0, symName: _ED_insertL, symObjAddr: 0x400, symBinAddr: 0x1000029F0, symSize: 0x9C }
+  - { offsetInCU: 0x291, offset: 0x291, size: 0x8, addend: 0x0, symName: _GR_init, symObjAddr: 0x49C, symBinAddr: 0x100002A8C, symSize: 0x58 }
+  - { offsetInCU: 0x2C7, offset: 0x2C7, size: 0x8, addend: 0x0, symName: _GR_Print_All_ord, symObjAddr: 0x4F4, symBinAddr: 0x100002AE4, symSize: 0x260 }
+  - { offsetInCU: 0x369, offset: 0x369, size: 0x8, addend: 0x0, symName: _GR_Ad_Ver, symObjAddr: 0x754, symBinAddr: 0x100002D44, symSize: 0xA4 }
+  - { offsetInCU: 0x3BB, offset: 0x3BB, size: 0x8, addend: 0x0, symName: _GR_Edge_Search, symObjAddr: 0x7F8, symBinAddr: 0x100002DE8, symSize: 0x144 }
+  - { offsetInCU: 0x437, offset: 0x437, size: 0x8, addend: 0x0, symName: _GR_Gen_List, symObjAddr: 0x93C, symBinAddr: 0x100002F2C, symSize: 0x138 }
+  - { offsetInCU: 0x4BD, offset: 0x4BD, size: 0x8, addend: 0x0, symName: _GR_free, symObjAddr: 0xA74, symBinAddr: 0x100003064, symSize: 0x138 }
+  - { offsetInCU: 0x26, offset: 0x775, size: 0x8, addend: 0x0, symName: _ST_init, symObjAddr: 0x0, symBinAddr: 0x10000319C, symSize: 0x40 }
+  - { offsetInCU: 0xEB, offset: 0x83A, size: 0x8, addend: 0x0, symName: _ST_init, symObjAddr: 0x0, symBinAddr: 0x10000319C, symSize: 0x40 }
+  - { offsetInCU: 0x121, offset: 0x870, size: 0x8, addend: 0x0, symName: _ST_insert, symObjAddr: 0x40, symBinAddr: 0x1000031DC, symSize: 0x204 }
+  - { offsetInCU: 0x173, offset: 0x8C2, size: 0x8, addend: 0x0, symName: _BST_searchR, symObjAddr: 0x244, symBinAddr: 0x1000033E0, symSize: 0x104 }
+  - { offsetInCU: 0x1B7, offset: 0x906, size: 0x8, addend: 0x0, symName: _ST_realloc, symObjAddr: 0x348, symBinAddr: 0x1000034E4, symSize: 0x44 }
+  - { offsetInCU: 0x1E9, offset: 0x938, size: 0x8, addend: 0x0, symName: _BST_Node_Init, symObjAddr: 0x38C, symBinAddr: 0x100003528, symSize: 0x7C }
+  - { offsetInCU: 0x23B, offset: 0x98A, size: 0x8, addend: 0x0, symName: _ST_search, symObjAddr: 0x408, symBinAddr: 0x1000035A4, symSize: 0x70 }
+  - { offsetInCU: 0x27F, offset: 0x9CE, size: 0x8, addend: 0x0, symName: _ST_print, symObjAddr: 0x478, symBinAddr: 0x100003614, symSize: 0x34 }
+  - { offsetInCU: 0x2A3, offset: 0x9F2, size: 0x8, addend: 0x0, symName: _BST_printR, symObjAddr: 0x4AC, symBinAddr: 0x100003648, symSize: 0x68 }
+  - { offsetInCU: 0x2C7, offset: 0xA16, size: 0x8, addend: 0x0, symName: _ST_search_by_index, symObjAddr: 0x514, symBinAddr: 0x1000036B0, symSize: 0x74 }
+  - { offsetInCU: 0x319, offset: 0xA68, size: 0x8, addend: 0x0, symName: _ST_search_by_indexR, symObjAddr: 0x588, symBinAddr: 0x100003724, symSize: 0xBC }
+  - { offsetInCU: 0x36B, offset: 0xABA, size: 0x8, addend: 0x0, symName: _ST_getDim, symObjAddr: 0x644, symBinAddr: 0x1000037E0, symSize: 0x18 }
+  - { offsetInCU: 0x393, offset: 0xAE2, size: 0x8, addend: 0x0, symName: _ST_select, symObjAddr: 0x65C, symBinAddr: 0x1000037F8, symSize: 0x7C }
+  - { offsetInCU: 0x3E1, offset: 0xB30, size: 0x8, addend: 0x0, symName: _ST_selectR, symObjAddr: 0x6D8, symBinAddr: 0x100003874, symSize: 0x110 }
+  - { offsetInCU: 0x433, offset: 0xB82, size: 0x8, addend: 0x0, symName: _ST_get_Id, symObjAddr: 0x7E8, symBinAddr: 0x100003984, symSize: 0x88 }
+  - { offsetInCU: 0x26, offset: 0xBF6, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003A0C, symSize: 0x23C }
+  - { offsetInCU: 0x4D, offset: 0xC1D, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x100003A0C, symSize: 0x23C }
+  - { offsetInCU: 0xCC, offset: 0xC9C, size: 0x8, addend: 0x0, symName: _Act_Sel, symObjAddr: 0x23C, symBinAddr: 0x100003C48, symSize: 0x108 }
+...
