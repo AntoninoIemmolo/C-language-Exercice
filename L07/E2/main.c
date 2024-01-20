@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #define PATH "./elementi.txt"
-#define DD 10
-#define DP 20
+#define DD 12
+#define DP 30
 
 struct accrob{
     char nome[100];
@@ -65,9 +65,9 @@ int main(void){
         printf("\n========================\n");
     }
     for(struct NodeDiag* l=head;l!=NULL;l=tmp){
-	tmp=l->link;
-	free(l);
-	    oree(l);
+        tmp=l->link;
+        free(l);
+	    //oree(l);
     }
 
     for(struct NodeDiag* l=sol;l!=NULL;l=tmp){
@@ -212,7 +212,7 @@ void Diag_Store(struct diag diag,struct NodeDiag **head){
     return ;
 }
 
-//sulla base dell scelte della accrobazie inserte nella diagonale valita qual'è la lista delle
+//sulla base dell scelte delle accrobazie inserte nella diagonale valita qual'è la lista delle
 //possibili scelte che sono possibili
 //Mat[tipo][DirIng][DirUsc][ReqPrec]
 struct accrob* Gen_Posb(int last,struct diag diag){
@@ -301,12 +301,12 @@ float Prog_Eval(struct NodeDiag* sol,struct NodeDiag* best,float ValBest){
     if(flagAvnt&&flagInd&&flagSeqAcc)
         if(ValBest<ValCurr){
             j=best;
-            for(struct NodeDiag* l=best;l!=NULL;l=tmp){
-		    tmp=l->link;
-		    free(l);
-	    }
+            for(struct NodeDiag* l=best->link;l!=NULL;l=tmp){
+                tmp=l->link;
+                free(l);
+	        }
             for(struct NodeDiag* l=sol;l!=NULL;l=l->link){
-                *j=*l;
+                j->diag=l->diag;
                 if(l->link!=NULL){
                     j->link=(struct NodeDiag*)malloc(sizeof(struct NodeDiag));
                     j=j->link;
@@ -329,9 +329,6 @@ void FreeMat(){
 						tmp=l->link;
 						free(l);
 					}
-
-
-
 }
 
 
